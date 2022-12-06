@@ -24,4 +24,26 @@ exports.typeDefs = gql`
   input BooksInput {
     isRead: Boolean
   }
+
+  type Mutation {
+    addBook(input: addBookInput!): Book!
+    deleteBook(id: Int!): Boolean!
+    updateBook(id: Int!, input: UpdateBookInput!): Book!
+  }
+
+  input addBookInput {
+    id: Int!
+    title: String!
+    author: String!
+    categoryId: String!
+    isRead: Boolean!
+  }
+
+  input UpdateBookInput {
+    id: Int
+    title: String
+    author: String
+    categoryId: String
+    isRead: Boolean
+  }
 `;
