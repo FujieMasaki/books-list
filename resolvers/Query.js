@@ -1,20 +1,22 @@
 exports.Query = {
-  books: (parent, { filter }, { books }) => {
-    let filteredBooks = books;
-    if (filter.isRead === true) {
-      filteredBooks = filteredBooks.filter((book) => {
-        return book.isRead;
-      });
+  books: (parent, { filter }, { db }) => {
+    let filteredBooks = db.books;
+    if (filter) {
+      if (filter.isRead === true) {
+        filteredBooks = filteredBooks.filter((book) => {
+          return book.isRead;
+        });
+      }
     }
     return filteredBooks;
   },
-  book: (parent, { id }, { books }) => {
+  book: (parent, { id }, { db }) => {
     const book = books.find((book) => book.id === bookId);
     if (!book) return null;
     return book;
   },
-  categories: (parent, args, { categories }) => categories,
-  category: (parent, { id }, { categories }) => {
+  categories: (parent, args, { db }) => categories,
+  category: (parent, { id }, { db }) => {
     const category = categories.find((category) => category.id === categoryId);
     if (!category) return null;
     return category;
