@@ -2,7 +2,7 @@ const { gql } = require("apollo-server");
 
 exports.typeDefs = gql`
   type Query {
-    books: [Book!]!
+    books(filter: BooksInput): [Book!]!
     book(id: Int!): Book
     categories: [Category!]!
     category(id: ID!): Category
@@ -19,5 +19,9 @@ exports.typeDefs = gql`
     id: ID!
     name: String!
     books: [Book!]!
+  }
+
+  input BooksInput {
+    isRead: Boolean
   }
 `;

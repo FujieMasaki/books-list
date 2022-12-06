@@ -1,5 +1,13 @@
 exports.Query = {
-  books: (parent, args, { books }) => books,
+  books: (parent, { filter }, { books }) => {
+    let filteredBooks = books;
+    if (filter.isRead === true) {
+      filteredBooks = filteredBooks.filter((book) => {
+        return book.isRead;
+      });
+    }
+    return filteredBooks;
+  },
   book: (parent, { id }, { books }) => {
     const book = books.find((book) => book.id === bookId);
     if (!book) return null;
